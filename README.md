@@ -16,3 +16,9 @@ $ cd goodMoney
 $ npm install
 ```
 
+Para executar o projeto no dispositivo.
+
+```sh
+$ react-native run-android
+```
+
