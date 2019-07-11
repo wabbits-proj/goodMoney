@@ -15,3 +15,29 @@ export function login(email, password){
       });
   });
 }
+
+export function createUser(name, email, password){
+  return new Promise((resolve, reject) => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(res => {        
+        insert('users', { id: res.user.uid, name, email })
+          .then(data => resolve(data))
+          .catch(error => reject(error));
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  });
+}
+
+function insert(ref, obj){
+  return new Promise((resolve, reject) => {
+    db()
+    .ref(ref)
+    .set(obj)
+    .then(data => resolve(data))
+    .catch(error => reject(error));
+  });
+}
