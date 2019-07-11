@@ -25,8 +25,7 @@ export default function Login(props) {
   const dispatch = useDispatch();
   const credentials = useSelector(state => state.credentials);
 
-  function onPressBtnAcess() {
-    
+  function onPressBtnAcess() {    
     const { email, password } = credentials;
 
     if(email != '' && password != ''){
