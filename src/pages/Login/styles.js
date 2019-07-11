@@ -21,9 +21,10 @@ export const Logo = styled.Image`
 
 export const Form = styled.View`
   height: ${heightPercentageToDp('40%')};
-  marginTop: ${heightPercentageToDp('6%')};
   marginLeft: ${widthPercentageToDp('10%')};
   marginRight: ${widthPercentageToDp('10%')};
+  marginBottom: ${heightPercentageToDp('10%')};
+  justifyContent: center;
 `;
 
 export const TextForgot = styled.TouchableOpacity`
@@ -40,7 +41,7 @@ export const ViewRegister = styled.View`
   width: ${widthPercentageToDp('100%')};
   height: ${heightPercentageToDp('10%')};
   marginTop: ${heightPercentageToDp('2%')};
-  marginBottom: ${heightPercentageToDp('7%')};
+  marginBottom: ${heightPercentageToDp('10%')};
   justifyContent: center;
   flexDirection: row;
   alignItems: center;

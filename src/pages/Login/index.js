@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar } from "react-native";
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   Container,
@@ -17,8 +17,33 @@ import Button from '~/components/Button';
 
 import logo from '~/images/logo.png';
 
+import { changeEmail, changePassword } from '~/store/actions/credentials';
+import { login } from '~/services/firebase';
+import { setItem } from '~/services/storage';
+
 export default function Login(props) {
+  const dispatch = useDispatch();
+  const credentials = useSelector(state => state.credentials);
+
   function onPressBtnAcess() {
+    
+    const { email, password } = credentials;
+
+    if(email != '' && password != ''){
+      login(email, password)
+        .then(data => {
+          loginSucess(data)
+        })
+        .catch(error => {
+          console.log(error);
+        })      
+    } else{
+      alert('Preencha o formulário para continuar');
+    }
+  }
+
+  async function loginSucess(data){
+    await setItem('user', { id: data.uid, email: data.email });
     props.navigation.navigate('Drawer');
   }
 
@@ -40,8 +65,21 @@ export default function Login(props) {
         />
       </LogoView>
       <Form>
-        <Input name="person" text="nome@email.com" borderColor="#FFB959" />
-        <Input name="lock" text="**********" borderColor="#FFB959" />
+        <Input 
+          name="person" 
+          text="nome@email.com" 
+          borderColor="#FFB959" 
+          val={credentials.email}  
+          func={(text) => dispatch(changeEmail(text))}
+        />
+        <Input 
+          name="lock" 
+          text="**********" 
+          security={true}
+          borderColor="#FFB959" 
+          val={credentials.password} 
+          func={(text) => dispatch(changePassword(text))}
+        />
 
         <TextForgot
           onPress={onPressTxtForgot}
