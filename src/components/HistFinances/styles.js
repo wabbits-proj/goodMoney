@@ -1,20 +1,21 @@
 import styled from 'styled-components/native';
 
-import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
+import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "~/services/utils";
 
 export const Container = styled.View`
   flex: 1;
-  marginTop: ${heightPercentageToDp('4%')};
+  z-index: 0;
+  marginTop: ${heightPercentageToDp('2%')};
 `;
 
 export const Title = styled.Text`
   alignSelf: center;
-  fontSize: 14;
+  fontSize: ${getAdjustedFontSize(20)};
 `;
 
 export const TxtMonth = styled.Text`
   alignSelf: center;
-  fontSize: 15;
+  fontSize: ${getAdjustedFontSize(18)};
 `;
 
 export const ViewTable = styled.View`
@@ -32,5 +33,9 @@ export const ColTable = styled.View`
   width: ${widthPercentageToDp('22.5%')};
   height: ${heightPercentageToDp('4%')};
   alignItems: center;
+`;
+
+export const Txt = styled.Text`
+  fontSize: ${props => getAdjustedFontSize(props.fontSize)};
 `;
 

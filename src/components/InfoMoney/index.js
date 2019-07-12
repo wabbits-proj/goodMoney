@@ -5,16 +5,14 @@ import {
   Left, 
   Center, 
   Right,
-  TxtCredit,
-  TxtDebit,
-  TxtNextMonth,
   ProgressBar,
   Progress,
   TxtProgress,
   LabelCredit,
   TxtLabel,
   BtnEdit,
-  TxtBtnEdit
+  TxtBtnEdit,
+  Txt
 } from './styles';
 
 export default function InfoMoney() {
@@ -22,16 +20,16 @@ export default function InfoMoney() {
     <>
       <Container>
         <Left>
-          <TxtCredit>Saldo</TxtCredit>
-          <TxtCredit>R$ 1.256,00</TxtCredit>
+          <Txt color="#42AB9E">Saldo</Txt>
+          <Txt color="#42AB9E">R$ 1.256,00</Txt>
         </Left>
         <Center>
-          <TxtDebit>Gastos</TxtDebit>
-          <TxtDebit>R$ 300,00</TxtDebit>
+          <Txt color="#AA4343">Gastos</Txt>
+          <Txt color="#AA4343">R$ 300,00</Txt>
         </Center>
         <Right>
-          <TxtNextMonth>Prox. mês</TxtNextMonth>
-          <TxtNextMonth>R$ 100,00</TxtNextMonth>
+          <Txt color="#4373A8">Prox. mês</Txt>
+          <Txt color="#4373A8">R$ 100,00</Txt>
         </Right>        
       </Container>
       <LabelCredit>

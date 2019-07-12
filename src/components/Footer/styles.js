@@ -1,21 +1,24 @@
 import styled from 'styled-components/native';
-import { StyleSheet } from "react-native";
+import { Animated } from "react-native";
 
-import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
+import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "~/services/utils";
 
-export const Container = styled.View`
-  width: ${widthPercentageToDp('90%')};
-  height: ${heightPercentageToDp('10%')}; 
+export const Container = styled(Animated.View)`
+  width: ${widthPercentageToDp('100%')};
+  height: ${heightPercentageToDp('7%')}; 
+  marginLeft: ${widthPercentageToDp('5%')};
+  marginRight: ${widthPercentageToDp('5%')};
   alignSelf: center; 
-  alignItems: center;
+  justifyContent: center;
   flexDirection: row;
   background: #FFF;  
-  borderTopWidth: ${StyleSheet.hairlineWidth}
+  elevation: 50;
+  z-index: 5;
 `;
 
 export const Col = styled.View`
   width: ${widthPercentageToDp('45%')};
-  height: ${heightPercentageToDp('10%')};  
+  height: ${heightPercentageToDp('7%')};  
   alignItems: center;
   justifyContent: center;
 `;
@@ -23,13 +26,14 @@ export const Col = styled.View`
 export const Btn = styled.TouchableOpacity`
   width: ${widthPercentageToDp('30%')}; 
   height: ${heightPercentageToDp('3%')};
-  justifyContent: center;  
   flexDirection: row;
+  justifyContent: center;  
+  alignItems: center;
   background: ${props => props.background};
   borderRadius: 5;
 `;
 
 export const TxtBtn = styled.Text`
-  fontSize: 13;
+  fontSize: ${getAdjustedFontSize(16)};
   color: #FFF;
 `;
