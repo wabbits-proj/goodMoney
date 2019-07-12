@@ -66,6 +66,7 @@ export const ProgressBar = styled.View`
   background: #828282;
   borderRadius: 5;
   flexDirection: row;
+  justifyContent: space-between;
 `;
 
 //  width: ${widthPercentageToDp('40%')};
@@ -74,17 +75,22 @@ export const Progress = styled.View`
   height: ${heightPercentageToDp('3%')}; 
   background: #4F4F4F;
   borderRadius: 5;
+  position: absolute;
+  zIndex: 0;
 `;
 
 export const TxtProgress = styled.Text`
   fontSize: 13;
-  color: blue;
+  color: #FFF;
   textAlign: right;
+  position: absolute;
+  zIndex: 1;
+  paddingLeft: ${widthPercentageToDp('50%')};
 `;
 
 export const BtnEdit = styled.TouchableOpacity`
   width: ${widthPercentageToDp('30%')}; 
-  height: 20;
+  height: ${heightPercentageToDp('3%')};
   alignSelf: center;
   alignItems: center;
   justifyContent: center;

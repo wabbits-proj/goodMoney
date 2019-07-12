@@ -40,7 +40,7 @@ export default function InfoMoney() {
       </LabelCredit>
       <ProgressBar>
         <Progress percent={30} />
-        {/* <TxtProgress>Resta</TxtProgress> */}
+        <TxtProgress>Resta R$ 999.999.999,99</TxtProgress>
       </ProgressBar>
       <BtnEdit>
         <TxtBtnEdit>EDITAR META</TxtBtnEdit>

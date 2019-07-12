@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
 
 export const ButtonContainer = styled.TouchableOpacity`
-  height: ${heightPercentageToDp('4%')};
+  height: ${heightPercentageToDp('6%')};
   alignSelf: stretch;
   paddingLeft: 10;
   marginLeft: ${widthPercentageToDp('20%')};

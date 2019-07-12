@@ -5,7 +5,7 @@ import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
 
 export const Container = styled.View`
   marginBottom: 16;
-  height: ${heightPercentageToDp('4%')};
+  height: ${heightPercentageToDp('6%')};
   flexDirection: row;
   justifyContent: space-between;
   borderColor: ${props => props.borderColor};

@@ -1,5 +1,4 @@
 import React from 'react';
-import { StatusBar, Text } from "react-native";
 
 import { 
   Container
@@ -8,6 +7,8 @@ import {
 import Header from '~/components/Header';
 import Chart from '~/components/Chart';
 import InfoMoney from '~/components/InfoMoney';
+import History from '~/components/HistFinances';
+import Footer from '~/components/Footer';
 
 export default function Main(props) {
   return (
@@ -16,7 +17,9 @@ export default function Main(props) {
       <Container>
         <InfoMoney />
         <Chart />
+        <History />
       </Container>
+      <Footer />
     </>
   );
 }

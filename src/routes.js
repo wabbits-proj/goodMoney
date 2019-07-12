@@ -55,7 +55,7 @@ const Routes = createSwitchNavigator({
   },
   Auth: AuthStack
 }, {
-  initialRouteName: 'Auth',
+  initialRouteName: 'Drawer',
 });
 
 export default createAppContainer(Routes);
