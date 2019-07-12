@@ -1,9 +1,11 @@
 import { StyleSheet } from "react-native";
 import styled from 'styled-components/native';
 
+import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
+
 export const Container = styled.View`
   marginBottom: 16;
-  height: 38;
+  height: ${heightPercentageToDp('4%')};
   flexDirection: row;
   justifyContent: space-between;
   borderColor: ${props => props.borderColor};
