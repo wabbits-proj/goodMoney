@@ -12,7 +12,7 @@ export default function Header({ navigation }) {
         <TouchIcon
           onPress={() => navigation.toggleDrawer()}
         >
-          <Icon name="short-text" size={getAdjustedFontSize(50)} />
+          <Icon name="short-text" size={getAdjustedFontSize(35)} />
         </TouchIcon>
       </Left>
       <Center>

@@ -1,65 +1,191 @@
-import React, { useState } from 'react';
-import { Animated, StyleSheet } from 'react-native';
+// import React, { useState, useEffect } from 'react';
+// import { Animated, StyleSheet, BackHandler, Easing } from 'react-native';
+
+// import FormAdd from '~/components/FormAdd';
+// import { Col, Btn, TxtBtn } from './styles';
+// import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
+
+// export default function Footer() {
+//   const [visible, setVisible] = useState(true);
+//   const [form, setForm] = useState(null);
+//   const height = new Animated.Value(heightPercentageToDp('7%'));
+
+//   useEffect(() => {
+//     backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+//       hideFormAdd();
+//       // setTimeout(() => {
+//       //   // setForm(null); 
+//       //   // setVisible(true);   
+//       // }, 1000);
+//       return true;
+//     });
+//   }, []);
+
+//   function onBtnPressDebit(){
+//     showFormAdd();
+//     setTimeout(() => {
+//       setVisible(false);  
+//       setForm(<FormAdd typeForm="addDebit" />);  
+//     }, 1000);
+//   }
+
+//   function onBtnPressCredit(){
+//     showFormAdd();
+//     setTimeout(() => {
+//       setVisible(false);    
+//       setForm(<FormAdd typeForm="addCredit" />);  
+//     }, 1000);
+//   }
+
+//   function showFormAdd(){
+//     Animated.timing(height, {
+//       toValue: heightPercentageToDp('50%'),
+//       duration: 1000,
+//     }).start();
+//   }
+
+//   function hideFormAdd(){
+//     setForm(null);
+//     setVisible(true);
+//     Animated.timing(height, {
+//       toValue: heightPercentageToDp('7%'),
+//       duration: 1000,
+//     }).start();
+//   }
+
+//   return (
+//     <Animated.View style={[styles.container, { height: height }]}>
+//       {
+//         (visible) ?
+//         <>
+//           <Col>
+//             <Btn 
+//               background="#AA4343"
+//               onPress={onBtnPressDebit}
+//             >
+//               <TxtBtn>Gasto</TxtBtn>
+//             </Btn>
+//           </Col>
+//           <Col>
+//             <Btn 
+//               background="#42AB9E"
+//               onPress={onBtnPressCredit}
+//             >
+//               <TxtBtn>Ganho</TxtBtn>
+//             </Btn>
+//           </Col>
+//         </>
+//         : form
+//       }      
+//     </Animated.View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     width: widthPercentageToDp('100%'),
+//     // height: heightPercentageToDp('7%'), 
+//     marginLeft: widthPercentageToDp('5%'),
+//     marginRight: widthPercentageToDp('5%'),
+//     alignSelf: 'center', 
+//     justifyContent: 'center',
+//     flexDirection: 'row',
+//     backgroundColor: '#FFF',  
+//     elevation: 20,
+//     zIndex: 5,
+//   }
+// });
+
+
+import React, { useState, useEffect } from 'react';
+import { Animated, StyleSheet, BackHandler, Easing } from 'react-native';
 
 import FormAdd from '~/components/FormAdd';
 import { Col, Btn, TxtBtn } from './styles';
 import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
 
-export default function Footer() {
-  const [visible, setVisible] = useState(true);
-  const [form, setForm] = useState(null);
-  const height = new Animated.Value(heightPercentageToDp('7%'));
+export default class Footer extends React.Component {
 
-  function onBtnPressDebit(){
-    Animated.timing(height, {
+  state = {
+    height: new Animated.Value(heightPercentageToDp('7%')),
+    visible: true,
+    form: null
+  }
+
+  componentDidMount(){
+    backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      this.hideFormAdd();
+      return true;
+    });
+  }
+
+  onBtnPressDebit(){
+    Animated.timing(this.state.height, {
       toValue: heightPercentageToDp('50%'),
-      duration: 1000
+      duration: 1000,
     }).start();
 
-    setTimeout(() => {
-      setVisible(false);  
-      setForm(<FormAdd typeForm="addDebit" />);  
+    setTimeout(() => {  
+      this.setState({
+        form: <FormAdd typeForm="addDebit" />,
+        visible: false
+      });  
     }, 1000);
   }
 
-  function onBtnPressCredit(){
-    Animated.timing(height, {
+  onBtnPressCredit(){
+    Animated.timing(this.state.height, {
       toValue: heightPercentageToDp('50%'),
-      duration: 1000
+      duration: 1000,
     }).start();
-    
+
     setTimeout(() => {
-      setVisible(false);    
-      setForm(<FormAdd typeForm="addCredit" />);  
+      this.setState({
+        form: <FormAdd typeForm="addCredit" />,
+        visible: false
+      }); 
     }, 1000);
   }
 
-  return (
-    <Animated.View style={[styles.container, { height: height }]}>
-      {
-        (visible) ?
-        <>
-          <Col>
-            <Btn 
-              background="#AA4343"
-              onPress={onBtnPressDebit}
-            >
-              <TxtBtn>Gasto</TxtBtn>
-            </Btn>
-          </Col>
-          <Col>
-            <Btn 
-              background="#42AB9E"
-              onPress={onBtnPressCredit}
-            >
-              <TxtBtn>Ganho</TxtBtn>
-            </Btn>
-          </Col>
-        </>
-        : form
-      }      
-    </Animated.View>
-  );
+  hideFormAdd(){
+    this.setState({
+      form: null,
+      visible: true
+    }); 
+
+    Animated.timing(this.state.height, {
+      toValue: heightPercentageToDp('7%'),
+      duration: 1000,
+    }).start();
+  }
+  render(){
+    return (
+      <Animated.View style={[styles.container, { height: this.state.height }]}>
+        {
+          (this.state.visible) ?
+          <>
+            <Col>
+              <Btn 
+                background="#AA4343"
+                onPress={() => this.onBtnPressDebit()}
+              >
+                <TxtBtn>Gasto</TxtBtn>
+              </Btn>
+            </Col>
+            <Col>
+              <Btn 
+                background="#42AB9E"
+                onPress={() => this.onBtnPressCredit()}
+              >
+                <TxtBtn>Ganho</TxtBtn>
+              </Btn>
+            </Col>
+          </>
+          : this.state.form
+        }      
+      </Animated.View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -72,7 +198,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     backgroundColor: '#FFF',  
-    elevation: 50,
+    elevation: 20,
     zIndex: 5,
   }
 });

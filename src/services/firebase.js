@@ -41,3 +41,14 @@ function insert(ref, obj){
     .catch(error => reject(error));
   });
 }
+
+export function insertChild(ref, child, obj){
+  return new Promise((resolve, reject) => {
+    db()
+    .ref(ref)
+    .child(child)
+    .set(obj)
+    .then(data => resolve(data))
+    .catch(error => reject(error));
+  });
+}

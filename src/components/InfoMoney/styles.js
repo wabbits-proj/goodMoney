@@ -25,7 +25,7 @@ export const Right = styled.View`
 
 export const Txt = styled.Text`
   textAlign: center;
-  fontSize: ${getAdjustedFontSize(25)};
+  fontSize: ${getAdjustedFontSize(18)};
   color: ${props => props.color};
   paddingBottom: 10;
 `;

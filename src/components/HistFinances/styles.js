@@ -10,12 +10,12 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   alignSelf: center;
-  fontSize: ${getAdjustedFontSize(20)};
+  fontSize: ${getAdjustedFontSize(18)};
 `;
 
 export const TxtMonth = styled.Text`
   alignSelf: center;
-  fontSize: ${getAdjustedFontSize(18)};
+  fontSize: ${getAdjustedFontSize(16)};
 `;
 
 export const ViewTable = styled.View`
