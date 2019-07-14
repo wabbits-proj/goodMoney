@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, ListView } from 'react-native';
 import { format } from 'date-fns';
 import { getHistoricMonth } from "~/services/firebase";
 import { getItem } from '~/services/storage';
@@ -7,11 +7,22 @@ import { getItem } from '~/services/storage';
 import { Container, Title, TxtMonth, ViewTable, RowTable, ColTable, Txt } from './styles';
 
 export default function HistFinances() {
-  useEffect(async () => {
+  const [data, setData] = useState([]);
+
+  async function getHistFinances(){
     let user = await getItem('user');
-    getHistoricMonth(6, 2019, user.id);
-    
-  }, [null]);
+    getHistoricMonth('07', 2019, user.id)
+    .then(res => {
+      setData(res);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  useEffect(() => {
+    getHistFinances();
+  }, []);
 
   return (
     <Container>
@@ -26,24 +37,14 @@ export default function HistFinances() {
           <ColTable><Text fontSize="14">Descrição: </Text></ColTable>
         </RowTable>
 
-        <RowTable>
-          <ColTable><Txt fontSize="12">05/07/2019</Txt></ColTable>
-          <ColTable><Txt fontSize="12">+ R$ 1.200,00</Txt></ColTable>
-          <ColTable><Txt fontSize="12">Não se aplica</Txt></ColTable>
-          <ColTable><Txt fontSize="12">Salário</Txt></ColTable>
-        </RowTable>
-        <RowTable>
-          <ColTable><Txt fontSize="12">05/07/2019</Txt></ColTable>
-          <ColTable><Txt fontSize="12">+ R$ 1.200,00</Txt></ColTable>
-          <ColTable><Txt fontSize="12">Não se aplica</Txt></ColTable>
-          <ColTable><Txt fontSize="12">Salário</Txt></ColTable>
-        </RowTable>
-        <RowTable>
-          <ColTable><Txt fontSize="12">05/07/2019</Txt></ColTable>
-          <ColTable><Txt fontSize="12">+ R$ 1.200,00</Txt></ColTable>
-          <ColTable><Txt fontSize="12">Não se aplica</Txt></ColTable>
-          <ColTable><Txt fontSize="12">Salário</Txt></ColTable>
-        </RowTable>        
+        {data.map((row, index) => (
+          <RowTable key={index}>
+            <ColTable><Txt fontSize="12">{row.date}</Txt></ColTable>
+            <ColTable><Txt fontSize="12">{(row.type=='credit') ? '+' : '-'} R$ {row.value}</Txt></ColTable>
+            <ColTable><Txt fontSize="12">{row.portion || 'Não se aplica'}</Txt></ColTable>
+            <ColTable><Txt fontSize="12">{row.description}</Txt></ColTable>
+          </RowTable>
+        ))}
       </ViewTable>
     </Container>
   );

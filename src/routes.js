@@ -15,23 +15,12 @@ import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import Forgot from '~/pages/Forgot';
 
-import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
+import DrawerComponent from '~/components/DrawerComponent';
+
+import { widthPercentageToDp } from "~/services/utils";
 
 const CustomDrawerContentComponent = props => (
-  <ScrollView style={{ flex: 1 }}>
-    <View style={{
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom: 20
-    }}>
-      <Icon name="person" size={108} />
-      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>User Name</Text>
-      <Text style={{ fontSize: 14 }}>Status dos dados: Atualizado</Text>
-    </View>
-    <SafeAreaView style={{ flex: 1, }}>
-      <DrawerItems {...props} />
-    </SafeAreaView>
-  </ScrollView>
+  <DrawerComponent />
 );
 
 const Drawer = createDrawerNavigator({

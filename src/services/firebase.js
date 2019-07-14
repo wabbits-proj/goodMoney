@@ -37,7 +37,7 @@ function insert(ref, obj){
   return new Promise((resolve, reject) => {
     db()
     .ref(ref)
-    .set(obj)
+    .push(obj)
     .then(data => resolve(data))
     .catch(error => reject(error));
   });
@@ -54,13 +54,38 @@ export function insertChild(ref, child, obj){
   });
 }
 
-export function getHistoricMonth(month = '07', year = 2019, id){
-  db()
-  .ref(`debit/${id}/${year}`)
-  .orderByChild('date')
-  .once('value', function(snapshot){
-    snapshot.forEach((keysSnapshot) => {
-      console.log(keysSnapshot.val());
+export function getHistoricMonth(month, year, id){
+  let array = [];
+  return new Promise((resolve, reject) => {
+    db()
+    .ref(`hist/${id}`)
+    .child(`debit/${year}`)
+    .orderByChild('month')
+    .equalTo(month)
+    .once('value')
+    .then(function(snapshot){
+      snapshot.forEach((keysSnapshot) => {
+        let keys = keysSnapshot.val();
+        array.push({ ...keys, type: 'debit' });
+      });
+
+      db()
+      .ref(`hist/${id}`)
+      .child(`credit/${year}`)
+      .orderByChild('month')
+      .equalTo(month)
+      .once('value')
+      .then(function(snapshot){
+        snapshot.forEach((keysSnapshot) => {
+          let keys = keysSnapshot.val();
+          array.push({ ...keys, type: 'credit' });
+        })
+
+        resolve(array);
+      })
+      .catch(error => reject(error));
     })
+    .catch(error => reject(error));
   });
 }
+

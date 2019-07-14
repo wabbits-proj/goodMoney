@@ -27,10 +27,11 @@ export default function FormAdd({ typeForm }) {
 
   async function addCredit(){
     let user = await getItem('user');
-    insertChild(`credit/${user.id}`, format(new Date(), 'YYYY'), {
+    insertChild(`hist/${user.id}/credit`, format(new Date(), 'YYYY'), {
       value,
       description,
-      date: format(new Date(), 'D/MM/YYYY')
+      date: format(new Date(), 'D/MM/YYYY'),
+      month: format(new Date(), 'MM'),
     })
     .then(alert('Sucesso'))
     .catch(err => {
@@ -39,17 +40,22 @@ export default function FormAdd({ typeForm }) {
   }
 
   async function addDebit(){
-    let month = (icon) ? date :  format(addMonths(new Date(), 1), 'D/MM/YYYY');
+    let valueFormated = value.split('.').join('').split(',').join('.');
+    let valuePortion = (portion > 1) ? parseFloat((valueFormated / portion)).toFixed(2).toString().replace('.',',') : value;
+    let dt = (icon) ? date :  format(addMonths(new Date(), 1), 'D/MM/YYYY');
     let user = await getItem('user');
     let promiseList = new Promise((resolve, reject) => {
       for(let i=0; i<parseInt(portion); i++){
-        let arrayMonth = month.split('/');
-        let mesTrated = format(addMonths(parse(`${arrayMonth[2]}-${arrayMonth[1]}-${arrayMonth[0]}`), i), 'D/MM/YYYY');
+        let arrayMonth = dt.split('/');
+        let dateTrated = addMonths(parse(`${arrayMonth[2]}-${arrayMonth[1]}-${arrayMonth[0]}`), i);
+        let dateFormate = format(dateTrated, 'D/MM/YYYY');
         
-        insertChild(`debit/${user.id}`, format(new Date(), 'YYYY'), {
-          value,
+        insertChild(`hist/${user.id}/debit`, format(new Date(), 'YYYY'), {
+          value: valuePortion,
           description,
-          date: mesTrated
+          date: dateFormate,
+          month: format(dateTrated, 'MM'),
+          portion: `${i+1}/${portion}`
         })
         .then(data => {
           resolve(data);
@@ -65,6 +71,7 @@ export default function FormAdd({ typeForm }) {
       alert('Sucesso');
     })
     .catch(error => {
+      console.log(error);
       alert('Erro');
     })
   }
