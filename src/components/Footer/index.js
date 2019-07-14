@@ -97,17 +97,17 @@
 // });
 
 
-import React, { useState, useEffect } from 'react';
-import { Animated, StyleSheet, BackHandler, Easing } from 'react-native';
+import React from 'react';
+import { Animated, BackHandler } from 'react-native';
 
 import FormAdd from '~/components/FormAdd';
-import { Col, Btn, TxtBtn } from './styles';
-import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
+import { Container, Col, Btn, TxtBtn } from './styles';
+import { heightPercentageToDp } from "~/services/utils";
 
 export default class Footer extends React.Component {
-
   state = {
     height: new Animated.Value(heightPercentageToDp('7%')),
+    opacity: new Animated.Value(1),
     visible: true,
     form: null
   }
@@ -120,31 +120,41 @@ export default class Footer extends React.Component {
   }
 
   onBtnPressDebit(){
-    Animated.timing(this.state.height, {
-      toValue: heightPercentageToDp('50%'),
+    Animated.timing(this.state.opacity, {
+      toValue: 0,
+      duration: 500,      
+    }).start(() => {
+      Animated.timing(this.state.height, {
+        toValue: heightPercentageToDp('50%'),
       duration: 1000,
-    }).start();
+      }).start();
+    });
 
     setTimeout(() => {  
       this.setState({
         form: <FormAdd typeForm="addDebit" />,
         visible: false
       });  
-    }, 1000);
+    }, 1500);
   }
 
   onBtnPressCredit(){
-    Animated.timing(this.state.height, {
-      toValue: heightPercentageToDp('50%'),
+    Animated.timing(this.state.opacity, {
+      toValue: 0,
+      duration: 500,      
+    }).start(() => {
+      Animated.timing(this.state.height, {
+        toValue: heightPercentageToDp('50%'),
       duration: 1000,
-    }).start();
+      }).start();
+    });
 
     setTimeout(() => {
       this.setState({
         form: <FormAdd typeForm="addCredit" />,
         visible: false
       }); 
-    }, 1000);
+    }, 1500);
   }
 
   hideFormAdd(){
@@ -156,15 +166,21 @@ export default class Footer extends React.Component {
     Animated.timing(this.state.height, {
       toValue: heightPercentageToDp('7%'),
       duration: 1000,
-    }).start();
+    }).start(() => {
+      Animated.timing(this.state.opacity, {
+        toValue: 1,
+        duration: 500,
+      }).start();
+    });
   }
+
   render(){
     return (
-      <Animated.View style={[styles.container, { height: this.state.height }]}>
+      <Container style={{ height: this.state.height }}>
         {
           (this.state.visible) ?
           <>
-            <Col>
+            <Col style={{ opacity: this.state.opacity }}>
               <Btn 
                 background="#AA4343"
                 onPress={() => this.onBtnPressDebit()}
@@ -172,7 +188,7 @@ export default class Footer extends React.Component {
                 <TxtBtn>Gasto</TxtBtn>
               </Btn>
             </Col>
-            <Col>
+            <Col style={{ opacity: this.state.opacity }}>
               <Btn 
                 background="#42AB9E"
                 onPress={() => this.onBtnPressCredit()}
@@ -183,22 +199,7 @@ export default class Footer extends React.Component {
           </>
           : this.state.form
         }      
-      </Animated.View>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthPercentageToDp('100%'),
-    // height: heightPercentageToDp('7%'), 
-    marginLeft: widthPercentageToDp('5%'),
-    marginRight: widthPercentageToDp('5%'),
-    alignSelf: 'center', 
-    justifyContent: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#FFF',  
-    elevation: 20,
-    zIndex: 5,
-  }
-});

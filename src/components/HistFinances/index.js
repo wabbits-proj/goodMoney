@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from 'react-native';
+import { format } from 'date-fns';
+import { getHistoricMonth } from "~/services/firebase";
+import { getItem } from '~/services/storage';
 
 import { Container, Title, TxtMonth, ViewTable, RowTable, ColTable, Txt } from './styles';
 
 export default function HistFinances() {
+  useEffect(async () => {
+    let user = await getItem('user');
+    getHistoricMonth(6, 2019, user.id);
+    
+  }, [null]);
+
   return (
     <Container>
       <Title>Histórico financeiro</Title>
-      <TxtMonth>Mês: Julho</TxtMonth>
+      <TxtMonth>Mês: {format(new Date(), 'MMMM')}</TxtMonth>
 
       <ViewTable>
         <RowTable>

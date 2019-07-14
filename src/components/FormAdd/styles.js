@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
 import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "~/services/utils";
 
@@ -41,5 +42,29 @@ export const BtnAdd = styled.TouchableOpacity`
 export const TxtBtnAdd = styled.Text`
   fontSize: ${getAdjustedFontSize(16)};
   color: #FFF;
+`;
+
+export const SwitchView = styled.View`
+  width: ${widthPercentageToDp('90%')};
+  height: ${heightPercentageToDp('3.5%')};
+  background: #FFF;
+  marginTop: ${heightPercentageToDp('5%')};
+  justifyContent: center;  
+`;  
+
+export const ViewBtnDebit = styled.View`
+  height: ${heightPercentageToDp('5%')}; 
+  flexDirection: row;
+  justifyContent: space-between;
+  marginTop: ${heightPercentageToDp('14.5%')}; 
+`;
+
+export const BtnDebit = styled.TouchableOpacity`
+  width: ${widthPercentageToDp('40%')};
+  height: ${heightPercentageToDp('3.5%')};
+  background: ${props => props.background};
+  justifyContent: center;  
+  alignItems: center;
+  borderRadius: 5;
 `;
 

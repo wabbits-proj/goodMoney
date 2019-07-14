@@ -3,7 +3,7 @@ import { Animated } from "react-native";
 
 import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "~/services/utils";
 
-export const Container = styled(Animated.View)`
+export const Container = Animated.createAnimatedComponent(styled(Animated.View)`
   width: ${widthPercentageToDp('100%')};
   height: ${heightPercentageToDp('7%')}; 
   marginLeft: ${widthPercentageToDp('5%')};
@@ -14,14 +14,14 @@ export const Container = styled(Animated.View)`
   background: #FFF;  
   elevation: 50;
   z-index: 5;
-`;
+`);
 
-export const Col = styled.View`
+export const Col = Animated.createAnimatedComponent(styled.View`
   width: ${widthPercentageToDp('45%')};
   height: ${heightPercentageToDp('7%')};  
   alignItems: center;
   justifyContent: center;
-`;
+`);
 
 export const Btn = styled.TouchableOpacity`
   width: ${widthPercentageToDp('30%')}; 

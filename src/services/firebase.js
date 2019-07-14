@@ -1,5 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase';
+import { getDaysInMonth } from "date-fns";
 import db from '~/config/firebase';
 
 export function login(email, password){
@@ -47,8 +48,19 @@ export function insertChild(ref, child, obj){
     db()
     .ref(ref)
     .child(child)
-    .set(obj)
+    .push(obj)
     .then(data => resolve(data))
     .catch(error => reject(error));
+  });
+}
+
+export function getHistoricMonth(month = '07', year = 2019, id){
+  db()
+  .ref(`debit/${id}/${year}`)
+  .orderByChild('date')
+  .once('value', function(snapshot){
+    snapshot.forEach((keysSnapshot) => {
+      console.log(keysSnapshot.val());
+    })
   });
 }
