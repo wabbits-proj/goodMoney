@@ -1,18 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { Text, ListView } from 'react-native';
-import { format } from 'date-fns';
+import { useSelector } from "react-redux";
+import { format, parse } from 'date-fns';
+
 import { getHistoricMonth } from "~/services/firebase";
 import { getItem } from '~/services/storage';
 
 import { Container, Title, TxtMonth, ViewTable, RowTable, ColTable, Txt } from './styles';
 
 export default function HistFinances() {
+  const todo = useSelector(state => state.todo);
   const [data, setData] = useState([]);
 
   async function getHistFinances(){
+    let dtA = null;
+    let dtB = null;
     let user = await getItem('user');
     getHistoricMonth('07', 2019, user.id)
     .then(res => {
+      res.sort((a, b) => {
+        dtA = a.date.split('/'); 
+        dtB = b.date.split('/'); 
+        
+        dtA = parse(`${dtA[2]}-${dtA[1]}-${dtA[0]}`);
+        dtB = parse(`${dtB[2]}-${dtB[1]}-${dtB[0]}`);
+
+        if(dtA < dtB) return -1;
+        if(dtA > dtB) return 1;
+        return 0;
+      });
       setData(res);
     })
     .catch(error => {
@@ -22,7 +38,7 @@ export default function HistFinances() {
 
   useEffect(() => {
     getHistFinances();
-  }, []);
+  }, [todo.getHistoric]);
 
   return (
     <Container>

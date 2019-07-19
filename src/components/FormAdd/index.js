@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { format, addMonths, parse } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { getHistoric } from '~/store/actions/todo';
 import { insertChild } from '~/services/firebase';
 import { getItem } from '~/services/storage';
 import { valueMoney, validNumber, valueDate } from "~/services/utils";
 import { Container, Row, Text, TextInput, BtnAdd, TxtBtnAdd, ViewBtnDebit, BtnDebit } from './styles';
 
 export default function FormAdd({ typeForm }) {
+  const dispatch = useDispatch();
   const [value, setValue] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -33,7 +36,12 @@ export default function FormAdd({ typeForm }) {
       date: format(new Date(), 'D/MM/YYYY'),
       month: format(new Date(), 'MM'),
     })
-    .then(alert('Sucesso'))
+    .then(res => {
+      alert('Sucesso');
+      setValue('');
+      setDescription('');
+      dispatch(getHistoric());
+    })
     .catch(err => {
       console.log(err);
     });
@@ -41,7 +49,7 @@ export default function FormAdd({ typeForm }) {
 
   async function addDebit(){
     let valueFormated = value.split('.').join('').split(',').join('.');
-    let valuePortion = (portion > 1) ? parseFloat((valueFormated / portion)).toFixed(2).toString().replace('.',',') : value;
+    let valuePortion = (portion > 1) ? valueMoney(parseFloat((valueFormated / portion)).toFixed(2).toString()) : value;
     let dt = (icon) ? date :  format(addMonths(new Date(), 1), 'D/MM/YYYY');
     let user = await getItem('user');
     let promiseList = new Promise((resolve, reject) => {
@@ -69,6 +77,11 @@ export default function FormAdd({ typeForm }) {
     Promise.all([promiseList])
     .then(data => {
       alert('Sucesso');
+      setValue('');
+      setDescription('');
+      setDate('');
+      setPortion('');
+      dispatch(getHistoric());
     })
     .catch(error => {
       console.log(error);

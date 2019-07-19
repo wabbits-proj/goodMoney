@@ -65,6 +65,7 @@ export default function Login(props) {
       </LogoView>
       <Form>
         <Input 
+          type="email-address"
           name="person" 
           text="nome@email.com" 
           borderColor="#FFB959" 

@@ -7,7 +7,18 @@ import { getAdjustedFontSize, widthPercentageToDp, heightPercentageToDp } from "
 
 import { Container, Header, Row } from './styles';
 
+import { removeItem } from '~/services/storage';
+
 export default function DrawerComponent(props) {
+  function logoutUser(){
+    removeItem('user')
+    .then(res => {
+      props.navigation.navigate('Auth')
+    })
+    .catch(err => {
+    });
+  }
+
   return (
     <Container>
       <Header>
@@ -23,7 +34,7 @@ export default function DrawerComponent(props) {
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%') }}>Editar informações</Text>
         </Row>
         <Row>
-          <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="delete-outline" size={12} />
+          <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="delete" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%') }}>Limpar dados</Text>
         </Row>
         <Row>
@@ -34,7 +45,9 @@ export default function DrawerComponent(props) {
           <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="filter-none" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%') }}>Sobre</Text>
         </Row>
-        <Row>
+        <Row
+          onPress={() => logoutUser()}
+        >
           <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="power-settings-new" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%') }}>Sair</Text>
         </Row>

@@ -1,15 +1,12 @@
 import React from 'react';
-import { ScrollView, View, Text } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   createAppContainer,
   createSwitchNavigator,
   createDrawerNavigator,
-  DrawerItems,
-  SafeAreaView
 } from 'react-navigation';
 
+import AuthLoading from '~/pages/AuthLoading';
 import Main from '~/pages/Main';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
@@ -19,14 +16,10 @@ import DrawerComponent from '~/components/DrawerComponent';
 
 import { widthPercentageToDp } from "~/services/utils";
 
-const CustomDrawerContentComponent = props => (
-  <DrawerComponent />
-);
-
 const Drawer = createDrawerNavigator({
   Main
 }, {
-  contentComponent: CustomDrawerContentComponent,
+  contentComponent: (props) => <DrawerComponent navigation={props.navigation} />,
   drawerWidth: widthPercentageToDp('80%'),
 });
 
@@ -42,9 +35,10 @@ const Routes = createSwitchNavigator({
   Drawer: {
     screen: Drawer,
   },
-  Auth: AuthStack
+  Auth: AuthStack,
+  AuthLoading
 }, {
-  initialRouteName: 'Drawer',
+  initialRouteName: 'AuthLoading',
 });
 
 export default createAppContainer(Routes);

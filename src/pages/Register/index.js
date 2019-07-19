@@ -70,6 +70,7 @@ export default function Register(props) {
             />
             <Label>* E-mail</Label>
             <Input 
+              type="email-address"
               text="nome@email.com" 
               borderColor="#42AB9E" 
               val={credentials.email} 

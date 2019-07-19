@@ -1,6 +1,5 @@
 import React from 'react';
 import * as firebase from 'firebase';
-import { getDaysInMonth } from "date-fns";
 import db from '~/config/firebase';
 
 export function login(email, password){
@@ -23,7 +22,7 @@ export function createUser(name, email, password){
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => {        
-        insert('users', { id: res.user.uid, name, email })
+        insert(`users/${res.user.uid}`, { id: res.user.uid, name, email, objective: '0', credit: '0' })
           .then(data => resolve(data))
           .catch(error => reject(error));
       })
@@ -33,11 +32,25 @@ export function createUser(name, email, password){
   });
 }
 
+export function resetPassword(email){
+  return new Promise((resolve, reject) => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      })
+  });
+}
+
 function insert(ref, obj){
   return new Promise((resolve, reject) => {
     db()
     .ref(ref)
-    .push(obj)
+    .set(obj)
     .then(data => resolve(data))
     .catch(error => reject(error));
   });

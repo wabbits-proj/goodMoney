@@ -7,15 +7,15 @@ export const Container = styled.ScrollView`
 `;
 
 export const Header = styled.View` 
-    justifyContent: center;
-    alignItems: center;
-    marginBottom: 20;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20;
 `;
 
 export const Row = styled.TouchableOpacity` 
     height: ${heightPercentageToDp('5%')};
-    marginTop: ${heightPercentageToDp('0.8%')};
-    marginLeft: ${widthPercentageToDp('3%')};
-    marginRight: ${widthPercentageToDp('3%')};
-    flexDirection: row;
+    margin-top: ${heightPercentageToDp('0.8%')};
+    margin-left: ${widthPercentageToDp('3%')};
+    margin-right: ${widthPercentageToDp('3%')};
+    flex-direction: row;
 `;
