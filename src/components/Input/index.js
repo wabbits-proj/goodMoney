@@ -8,6 +8,7 @@ export default function Input({ text, name, borderColor, val, func, type, securi
     <Container borderColor={borderColor}>
       <Icon name={name} size={21} color="#828282" style={{ marginTop: 8, marginLeft: 6 }} />
       <TextInput 
+        autoCapitalize='none'
         keyboardType={type || 'default'}
         secureTextEntry={security}
         placeholder={text} 

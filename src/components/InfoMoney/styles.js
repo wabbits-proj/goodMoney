@@ -4,8 +4,8 @@ import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "
 export const Container = styled.View`
   width: ${widthPercentageToDp('100%')};
   height: ${heightPercentageToDp('10%')};  
-  flexDirection: row;
-  justifyContent: center;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export const Left = styled.View`
@@ -24,69 +24,69 @@ export const Right = styled.View`
 `;
 
 export const Txt = styled.Text`
-  textAlign: center;
-  fontSize: ${getAdjustedFontSize(17)};
+  text-align: center;
+  font-size: ${getAdjustedFontSize(17)};
   color: ${props => props.color};
-  paddingBottom: 10;
+  padding-bottom: 10;
 `;
 
 export const LabelCredit = styled.View`
   width: ${widthPercentageToDp('90%')};
   height: ${heightPercentageToDp('3%')};
-  alignSelf: center;
-  flexDirection: row;
-  justifyContent: space-between;
-  marginTop: 10;
+  align-self: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10;
 `;
 
 export const TxtLabel = styled.Text`
-  fontSize: ${getAdjustedFontSize(15)};
+  font-size: ${getAdjustedFontSize(15)};
   color: ${props => props.color};
-  textAlign: ${props => props.align};
+  text-align: ${props => props.align};
 `;
 
 export const ProgressBar = styled.View`
   width: ${widthPercentageToDp('90%')};
   height: ${heightPercentageToDp('3%')}; 
-  alignSelf: center;
+  align-self: center;
   background: #828282;
-  borderRadius: 5;
-  flexDirection: row;
-  justifyContent: space-between;
-  alignItems: center;
+  border-radius: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Progress = styled.View`
   width: ${props => widthPercentageToDp((props.percent / 100) * 90)};
   height: ${heightPercentageToDp('3%')}; 
   background: #4F4F4F;
-  borderRadius: 5;
+  border-radius: 5;
   position: absolute;
-  zIndex: 0;
+  z-index: 0;
 `;
 
 export const TxtProgress = styled.Text`
-  fontSize: ${getAdjustedFontSize(16)};
+  font-Size: ${getAdjustedFontSize(16)};
   color: #FFF;
-  textAlign: right;
+  text-align: right;
   position: absolute;
-  zIndex: 1;
-  paddingLeft: ${widthPercentageToDp('58%')};
+  z-index: 1;
+  padding-left: ${widthPercentageToDp('58%')};
 `;
 
 export const BtnEdit = styled.TouchableOpacity`
   width: ${widthPercentageToDp('30%')}; 
   height: ${heightPercentageToDp('3%')};
-  alignSelf: center;
-  alignItems: center;
-  justifyContent: center;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
   background: #828282;
-  borderRadius: 5;
-  marginTop: 10;
+  border-radius: 5;
+  margin-top: 10;
 `;
 
 export const TxtBtnEdit = styled.Text`
-  fontSize: ${getAdjustedFontSize(16)};
+  font-size: ${getAdjustedFontSize(16)};
   color: #FFF;
 `;
 

@@ -16,19 +16,27 @@ import {
   Txt
 } from './styles';
 
+import { insertChild } from '~/services/firebase';
+import { getItem } from '~/services/storage';
+
 export default function InfoMoney() {
   const dispatch = useDispatch();
+  const todo = useSelector(state => state.todo);
+
+  function getCreditUser(){
+
+  }
 
   useEffect(() => {
-
-  });
+    getCreditUser();
+  }, []);
 
   return (
     <>
       <Container>
         <Left>
           <Txt color="#42AB9E">Saldo</Txt>
-          <Txt color="#42AB9E">R$ 1.256,00</Txt>
+          <Txt color="#42AB9E">R$ {todo.credit}</Txt>
         </Left>
         <Center>
           <Txt color="#AA4343">Gastos</Txt>
@@ -41,7 +49,7 @@ export default function InfoMoney() {
       </Container>
       <LabelCredit>
         <TxtLabel color="#4F4F4F" align="left">Saldo total: R$ 856,00</TxtLabel>
-        <TxtLabel color="#828282" align="right">Meta: R$ 3.500,00</TxtLabel>
+        <TxtLabel color="#828282" align="right">Meta: R$ {todo.objective}</TxtLabel>
       </LabelCredit>
       <ProgressBar>
         <Progress percent={30} />
