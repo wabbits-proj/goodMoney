@@ -10,8 +10,8 @@ export const Container = styled.View`
 export const LogoView = styled.View`
   width: ${widthPercentageToDp('100%')};
   height: ${heightPercentageToDp('28%')};
-  justifyContent: flex-end;
-  alignItems: center;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 export const Logo = styled.Image`
@@ -21,39 +21,42 @@ export const Logo = styled.Image`
 
 export const Form = styled.View`
   height: ${heightPercentageToDp('40%')};
-  marginTop: ${heightPercentageToDp('6%')};
-  marginLeft: ${widthPercentageToDp('10%')};
-  marginRight: ${widthPercentageToDp('10%')};
+  margin-left: ${widthPercentageToDp('10%')};
+  margin-right: ${widthPercentageToDp('10%')};
+  margin-bottom: ${heightPercentageToDp('10%')};
+  justify-content: center;
 `;
 
 export const TextForgot = styled.TouchableOpacity`
-  justifyContent: center;
-  alignItems: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Text = styled.Text`
   color: #828282;
-  fontSize: 15;
+  font-Size: 15;
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 export const ViewRegister = styled.View`
   width: ${widthPercentageToDp('100%')};
   height: ${heightPercentageToDp('10%')};
-  marginTop: ${heightPercentageToDp('2%')};
-  marginBottom: ${heightPercentageToDp('7%')};
-  justifyContent: center;
-  flexDirection: row;
-  alignItems: center;
+  margin-top: ${heightPercentageToDp('2%')};
+  margin-bottom: ${heightPercentageToDp('10%')};
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   background: #FFB959;
 `;
 
 export const TextRegister = styled.Text`
   color: ${props => props.color};
-  fontSize: 16;
+  font-size: 16;
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 export const TextTochRegister = styled.TouchableOpacity`
-  justifyContent: center;
-  alignItems: center;
+  justify-content: center;
+  align-items: center;
 `;
 

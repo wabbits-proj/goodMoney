@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
 
+import credentials from '~/store/reducers/credentials';
+import todo from '~/store/reducers/todo';
+
 const reducers = combineReducers({
-  // Remova essa linha depois de adicionar seus ducks
-  example: () => [],
+  credentials,
+  todo
 });
 
 export default reducers;

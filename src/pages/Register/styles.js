@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { widthPercentageToDp, heightPercentageToDp } from "~/services/utils";
+import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "~/services/utils";
 
 export const Container = styled.View`
   flex: 1;
@@ -10,8 +10,8 @@ export const Container = styled.View`
 export const LogoView = styled.View`
   width: ${widthPercentageToDp('100%')};
   height: ${heightPercentageToDp('20%')};
-  justifyContent: center;
-  alignItems: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Logo = styled.Image`
@@ -27,13 +27,14 @@ export const FormView = styled.View`
 
 export const Form = styled.View`
   height: ${heightPercentageToDp('40%')};
-  marginTop: ${heightPercentageToDp('6%')};
-  marginLeft: ${widthPercentageToDp('10%')};
-  marginRight: ${widthPercentageToDp('10%')};
+  margin-top: ${heightPercentageToDp('6%')};
+  margin-left: ${widthPercentageToDp('10%')};
+  margin-right: ${widthPercentageToDp('10%')};
 `;
 
 export const Label = styled.Text`
-  paddingLeft: 10;
+  padding-left: 10;
   color: #42AB9E;
-  fontSize: 16;
+  font-size: ${getAdjustedFontSize(16)};
+  font-family: 'AvenirLTStd-Medium';
 `;

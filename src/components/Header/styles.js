@@ -32,6 +32,5 @@ export const Right = styled.View`
 
 export const TouchIcon = styled.TouchableOpacity`
   marginLeft: 12;
-  marginBottom: 20;
+  marginBottom: 25;
 `;
-
