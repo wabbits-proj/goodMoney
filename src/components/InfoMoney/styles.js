@@ -89,9 +89,9 @@ export const BtnEdit = styled.TouchableOpacity`
 `;
 
 export const TxtBtnEdit = styled.Text`
-  font-size: ${getAdjustedFontSize(16)};
+  font-size: ${getAdjustedFontSize(14)};
   color: #FFF;
-  font-family: 'AvenirLTStd-Heavy';
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 

@@ -39,5 +39,6 @@ export const ColTable = styled.View`
 
 export const Txt = styled.Text`
   font-size: ${props => getAdjustedFontSize(props.fontSize)};
+  font-family: 'AvenirLTStd-Medium';
 `;
 

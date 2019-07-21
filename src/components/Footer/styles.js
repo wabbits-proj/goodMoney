@@ -6,11 +6,11 @@ import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "
 export const Container = Animated.createAnimatedComponent(styled(Animated.View)`
   width: ${widthPercentageToDp('100%')};
   height: ${heightPercentageToDp('7%')}; 
-  marginLeft: ${widthPercentageToDp('5%')};
-  marginRight: ${widthPercentageToDp('5%')};
-  alignSelf: center; 
-  justifyContent: center;
-  flexDirection: row;
+  margin-left: ${widthPercentageToDp('5%')};
+  margin-right: ${widthPercentageToDp('5%')};
+  align-self: center; 
+  justify-content: center;
+  flex-direction: row;
   background: #FFF;  
   elevation: 50;
   z-index: 5;
@@ -19,21 +19,22 @@ export const Container = Animated.createAnimatedComponent(styled(Animated.View)`
 export const Col = Animated.createAnimatedComponent(styled.View`
   width: ${widthPercentageToDp('45%')};
   height: ${heightPercentageToDp('7%')};  
-  alignItems: center;
-  justifyContent: center;
+  align-items: center;
+  justify-content: center;
 `);
 
 export const Btn = styled.TouchableOpacity`
   width: ${widthPercentageToDp('30%')}; 
   height: ${heightPercentageToDp('3%')};
-  flexDirection: row;
-  justifyContent: center;  
-  alignItems: center;
+  flex-direction: row;
+  justify-content: center;  
+  align-items: center;
   background: ${props => props.background};
-  borderRadius: 5;
+  border-radius: 5;
 `;
 
 export const TxtBtn = styled.Text`
-  fontSize: ${getAdjustedFontSize(16)};
+  font-Size: ${getAdjustedFontSize(16)};
   color: #FFF;
+  font-family: 'AvenirLTStd-Medium';
 `;
