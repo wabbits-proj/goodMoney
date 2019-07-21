@@ -5,37 +5,39 @@ import { widthPercentageToDp, heightPercentageToDp, getAdjustedFontSize } from "
 export const Container = styled.View`
   flex: 1;
   z-index: 0;
-  marginTop: ${heightPercentageToDp('2%')};
+  margin-top: ${heightPercentageToDp('2%')};
 `;
 
 export const Title = styled.Text`
-  alignSelf: center;
-  fontSize: ${getAdjustedFontSize(18)};
+  align-self: center;
+  font-size: ${getAdjustedFontSize(18)};  
+  font-family: 'AvenirLTStd-Heavy';
 `;
 
 export const TxtMonth = styled.Text`
-  alignSelf: center;
-  fontSize: ${getAdjustedFontSize(16)};
+  align-self: center;
+  font-size: ${getAdjustedFontSize(16)};
+  font-family: 'AvenirLTStd-MediumOblique';
 `;
 
 export const ViewTable = styled.View`
   flex: 1;
   width: ${widthPercentageToDp('90%')};
-  alignSelf: center;
+  align-self: center;
 `;
 
 export const RowTable = styled.View`
   flex: 1;
-  flexDirection: row;
+  flex-direction: row;
 `;
 
 export const ColTable = styled.View`
   width: ${widthPercentageToDp('22.5%')};
   height: ${heightPercentageToDp('4%')};
-  alignItems: center;
+  align-items: center;
 `;
 
 export const Txt = styled.Text`
-  fontSize: ${props => getAdjustedFontSize(props.fontSize)};
+  font-size: ${props => getAdjustedFontSize(props.fontSize)};
 `;
 

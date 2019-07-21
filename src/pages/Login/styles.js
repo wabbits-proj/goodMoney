@@ -35,6 +35,7 @@ export const TextForgot = styled.TouchableOpacity`
 export const Text = styled.Text`
   color: #828282;
   font-Size: 15;
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 export const ViewRegister = styled.View`
@@ -51,6 +52,7 @@ export const ViewRegister = styled.View`
 export const TextRegister = styled.Text`
   color: ${props => props.color};
   font-size: 16;
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 export const TextTochRegister = styled.TouchableOpacity`

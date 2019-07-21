@@ -27,7 +27,8 @@ export const Txt = styled.Text`
   text-align: center;
   font-size: ${getAdjustedFontSize(17)};
   color: ${props => props.color};
-  padding-bottom: 10;
+  padding-bottom: 10;  
+  font-family: 'AvenirLTStd-Heavy';
 `;
 
 export const LabelCredit = styled.View`
@@ -43,6 +44,7 @@ export const TxtLabel = styled.Text`
   font-size: ${getAdjustedFontSize(15)};
   color: ${props => props.color};
   text-align: ${props => props.align};
+  font-family: 'AvenirLTStd-Heavy';
 `;
 
 export const ProgressBar = styled.View`
@@ -72,6 +74,7 @@ export const TxtProgress = styled.Text`
   position: absolute;
   z-index: 1;
   padding-left: ${widthPercentageToDp('58%')};
+  font-family: 'AvenirLTStd-Heavy';
 `;
 
 export const BtnEdit = styled.TouchableOpacity`
@@ -88,6 +91,7 @@ export const BtnEdit = styled.TouchableOpacity`
 export const TxtBtnEdit = styled.Text`
   font-size: ${getAdjustedFontSize(16)};
   color: #FFF;
+  font-family: 'AvenirLTStd-Heavy';
 `;
 
 
