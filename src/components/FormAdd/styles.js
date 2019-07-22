@@ -10,14 +10,15 @@ export const Container = styled.View`
 
 export const Row = styled.View`
   height: ${heightPercentageToDp('5%')}; 
-  flexDirection: row;
-  justifyContent: space-between;
-  marginTop: ${heightPercentageToDp('1%')}; 
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${heightPercentageToDp('1%')}; 
 `;
 
 export const Text = styled.Text`
-  fontSize: ${getAdjustedFontSize(18)};
+  font-size: ${getAdjustedFontSize(18)};
   color: ${props => props.color || '#000'};
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 export const TextInput = styled.TextInput.attrs({
@@ -25,46 +26,48 @@ export const TextInput = styled.TextInput.attrs({
 })`
   width: ${widthPercentageToDp('60%')};
   height: ${heightPercentageToDp('7%')}; 
-  fontSize: ${getAdjustedFontSize(18)};  
+  font-size: ${getAdjustedFontSize(18)};  
   color: ${props => props.color};
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 export const BtnAdd = styled.TouchableOpacity`
   width: ${widthPercentageToDp('90%')};
   height: ${heightPercentageToDp('3.5%')};
   background: ${props => props.background};
-  marginTop: ${props => heightPercentageToDp(props.margin)};
-  justifyContent: center;  
-  alignItems: center;
-  borderRadius: 5;
+  margin-top: ${props => heightPercentageToDp(props.margin)};
+  justify-content: center;  
+  align-items: center;
+  border-radius: 5;
 `;
 
 export const TxtBtnAdd = styled.Text`
-  fontSize: ${getAdjustedFontSize(16)};
+  font-size: ${getAdjustedFontSize(16)};
   color: #FFF;
+  font-family: 'AvenirLTStd-Medium';
 `;
 
 export const SwitchView = styled.View`
   width: ${widthPercentageToDp('90%')};
   height: ${heightPercentageToDp('3.5%')};
   background: #FFF;
-  marginTop: ${heightPercentageToDp('5%')};
-  justifyContent: center;  
+  margin-top: ${heightPercentageToDp('5%')};
+  justify-content: center;  
 `;  
 
 export const ViewBtnDebit = styled.View`
   height: ${heightPercentageToDp('5%')}; 
-  flexDirection: row;
-  justifyContent: space-between;
-  marginTop: ${heightPercentageToDp('14.5%')}; 
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${heightPercentageToDp('14.5%')}; 
 `;
 
 export const BtnDebit = styled.TouchableOpacity`
   width: ${widthPercentageToDp('40%')};
   height: ${heightPercentageToDp('3.5%')};
   background: ${props => props.background};
-  justifyContent: center;  
-  alignItems: center;
-  borderRadius: 5;
+  justify-content: center;  
+  align-items: center;
+  border-radius: 5;
 `;
 

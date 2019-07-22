@@ -36,4 +36,5 @@ export const Label = styled.Text`
   padding-left: 10;
   color: #42AB9E;
   font-size: ${getAdjustedFontSize(16)};
+  font-family: 'AvenirLTStd-Medium';
 `;
