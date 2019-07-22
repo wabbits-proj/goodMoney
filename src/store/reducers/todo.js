@@ -8,7 +8,7 @@ import {
 
 const INITIAL_STATE = {
   getHistoric: 0,
-  objective: '3.500,00',
+  objective: '',
   credit: '0'
 }
 

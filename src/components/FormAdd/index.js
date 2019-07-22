@@ -98,6 +98,7 @@ export default function FormAdd({ typeForm }) {
             <TextInput 
               color="#42AB9E" 
               value={value} 
+              keyboardType="number-pad"
               onChangeText={(text) => setValue(valueMoney(text))}
             />
           </Row>
@@ -125,7 +126,7 @@ export default function FormAdd({ typeForm }) {
             <Text>Valor: </Text>
             <TextInput 
               color="#AA4343" 
-              value="200.000,00"
+              keyboardType="number-pad"
               value={value} 
               onChangeText={(text) => setValue(valueMoney(text))}
             />
@@ -136,6 +137,7 @@ export default function FormAdd({ typeForm }) {
               color="#AA4343" 
               value="22/07/2019"
               value={date} 
+              keyboardType="number-pad"
               onChangeText={(text) => setDate(valueDate(text))}
             />
           </Row>
@@ -144,6 +146,7 @@ export default function FormAdd({ typeForm }) {
             <TextInput 
               color="#AA4343" 
               value="3"
+              keyboardType="number-pad"
               value={portion} 
               onChangeText={(text) => setPortion(validNumber(text))}
             />

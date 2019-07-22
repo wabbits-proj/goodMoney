@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { 
@@ -16,12 +16,25 @@ import {
   Txt
 } from './styles';
 
-import { insertChild } from '~/services/firebase';
+import ModalObjective from '~/components/ModalObjective';
+import { setObjective } from '~/store/actions/todo';
 import { getItem } from '~/services/storage';
 
 export default function InfoMoney() {
   const dispatch = useDispatch();
   const todo = useSelector(state => state.todo);
+  
+  const [visible, setVisible] =  useState(false);
+
+  useEffect(async() => {
+    // let user = await getItem('user');
+    // dispatch(setObjective(user.objective));
+
+  }, []);
+
+  function closeModal(){
+    setVisible(false);
+  }
 
   function getCreditUser(){
 
@@ -55,9 +68,12 @@ export default function InfoMoney() {
         <Progress percent={30} />
         <TxtProgress>Resta R$ 999.999.999,99</TxtProgress>
       </ProgressBar>
-      <BtnEdit>
+      <BtnEdit
+        onPress={() => setVisible(true)}
+      >
         <TxtBtnEdit>EDITAR META</TxtBtnEdit>
-      </BtnEdit>
+      </BtnEdit>      
+      <ModalObjective visible={visible} funcClose={() => closeModal()} />
     </>
   );
 }

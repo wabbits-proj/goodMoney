@@ -8,7 +8,8 @@ export function login(email, password){
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
-        resolve(res.user);    
+        getDataUser(res.user.uid)
+          .then(data => resolve(data));
       })
       .catch(error => {
         reject(error);
@@ -46,7 +47,7 @@ export function resetPassword(email){
   });
 }
 
-function insert(ref, obj){
+export function insert(ref, obj){
   return new Promise((resolve, reject) => {
     db()
     .ref(ref)
@@ -64,6 +65,21 @@ export function insertChild(ref, child, obj){
     .push(obj)
     .then(data => resolve(data))
     .catch(error => reject(error));
+  });
+}
+
+function getDataUser(id){
+  return new Promise((resolve, reject) => {
+    db()
+    .ref(`users/${id}`)
+    .once('value')
+    .then(function(snapshot){
+      alert(JSON.stringify(snapshot))
+      
+      snapshot.forEach((keysSnapshot) => {
+        resolve(keysSnapshot.val());
+      });
+    })
   });
 }
 

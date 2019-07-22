@@ -28,7 +28,7 @@ const AuthStack = createSwitchNavigator({
   Register,
   Forgot
 }, {
-    initialRouteName: 'Register'
+    initialRouteName: 'Login'
 });
 
 const Routes = createSwitchNavigator({
