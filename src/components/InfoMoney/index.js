@@ -1,48 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { format, addMonths } from 'date-fns';
 
 import { 
   Container, 
   Left, 
   Center, 
   Right,
-  ProgressBar,
-  Progress,
-  TxtProgress,
-  LabelCredit,
-  TxtLabel,
-  BtnEdit,
-  TxtBtnEdit,
   Txt
 } from './styles';
 
-import ModalObjective from '~/components/ModalObjective';
-import { setObjective } from '~/store/actions/todo';
+import { setObjective, setDebitsMonth, setDebitsNextMonth, setCredit, infoMoneyDone } from '~/store/actions/todo';
 import { getItem } from '~/services/storage';
+import { getDebitsMonthUser, getCreditMonthUser } from "~/services/firebase";
+import { valueMoney } from "~/services/utils";
 
 export default function InfoMoney() {
   const dispatch = useDispatch();
-  const todo = useSelector(state => state.todo);
-  
-  const [visible, setVisible] =  useState(false);
+  const todo = useSelector(state => state.todo);  
 
-  useEffect(async() => {
-    // let user = await getItem('user');
-    // dispatch(setObjective(user.objective));
+  async function getInfoMoneyUser(){
+    let valueMonth = 0;
+    let valueNextMonth = 0;
+    let user = await getItem('user');
+    dispatch(setObjective(user.objective)); 
+    dispatch(infoMoneyDone(false));
 
-  }, []);
+    getCreditMonthUser(format(new Date(), 'MM'), format(new Date(), 'YYYY'), user.id)
+      .then(credit => {
+        dispatch(setCredit(valueMoney(credit.toString())));
+      })
+      .catch(err => {
+      });
+    
+    getDebitsMonthUser(format(new Date(), 'MM'), format(new Date(), 'YYYY'), user.id)
+      .then(data => {
+        data.forEach((debit) => {
+          let valueFormated = debit.value.split('.').join('').split(',').join('.');
+          valueMonth = parseFloat(valueMonth) + parseFloat(valueFormated);
+        });
 
-  function closeModal(){
-    setVisible(false);
-  }
+        dispatch(setDebitsMonth(valueMoney(valueMonth.toString())));
+      })
+      .catch(err => {
+        alert(JSON.stringify(err))
+      });
 
-  function getCreditUser(){
+      getDebitsMonthUser(format(addMonths(new Date(), 1), 'MM'), format(new Date(), 'YYYY'), user.id)
+      .then(data => {
+        data.forEach((debit) => {
+          let valueFormated = debit.value.split('.').join('').split(',').join('.');
+          valueNextMonth = parseFloat(valueNextMonth) + parseFloat(valueFormated);
+        })
 
+        dispatch(setDebitsNextMonth(valueMoney(valueNextMonth.toString())));
+        dispatch(infoMoneyDone(true));
+      })
+      .catch(err => {
+      });      
   }
 
   useEffect(() => {
-    getCreditUser();
-  }, []);
+    getInfoMoneyUser();
+  }, [todo.getHistoric]);
 
   return (
     <>
@@ -53,27 +73,13 @@ export default function InfoMoney() {
         </Left>
         <Center>
           <Txt color="#AA4343">Gastos</Txt>
-          <Txt color="#AA4343">R$ 300,00</Txt>
+          <Txt color="#AA4343">R$ {todo.debitsMonth}</Txt>
         </Center>
         <Right>
           <Txt color="#4373A8">Prox. mês</Txt>
-          <Txt color="#4373A8">R$ 100,00</Txt>
+          <Txt color="#4373A8">R$ {todo.debitsNextMonth}</Txt>
         </Right>        
       </Container>
-      <LabelCredit>
-        <TxtLabel color="#4F4F4F" align="left">Saldo total: R$ 856,00</TxtLabel>
-        <TxtLabel color="#828282" align="right">Meta: R$ {todo.objective}</TxtLabel>
-      </LabelCredit>
-      <ProgressBar>
-        <Progress percent={30} />
-        <TxtProgress>Resta R$ 999.999.999,99</TxtProgress>
-      </ProgressBar>
-      <BtnEdit
-        onPress={() => setVisible(true)}
-      >
-        <TxtBtnEdit>EDITAR META</TxtBtnEdit>
-      </BtnEdit>      
-      <ModalObjective visible={visible} funcClose={() => closeModal()} />
     </>
   );
 }

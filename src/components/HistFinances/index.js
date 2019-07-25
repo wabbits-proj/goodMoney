@@ -16,7 +16,7 @@ export default function HistFinances() {
     let dtA = null;
     let dtB = null;
     let user = await getItem('user');
-    getHistoricMonth('07', 2019, user.id)
+    getHistoricMonth(format(new Date(), 'MM'), format(new Date(), 'YYYY'), user.id)
     .then(res => {
       res.sort((a, b) => {
         dtA = a.date.split('/'); 

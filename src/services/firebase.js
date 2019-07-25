@@ -74,11 +74,10 @@ function getDataUser(id){
     .ref(`users/${id}`)
     .once('value')
     .then(function(snapshot){
-      alert(JSON.stringify(snapshot))
-      
-      snapshot.forEach((keysSnapshot) => {
-        resolve(keysSnapshot.val());
-      });
+      resolve(snapshot);
+    })
+    .catch(err => {
+      reject(err);
     })
   });
 }
@@ -115,6 +114,51 @@ export function getHistoricMonth(month, year, id){
       .catch(error => reject(error));
     })
     .catch(error => reject(error));
+  });
+}
+
+export function getDebitsMonthUser(month, year, id){
+  let array = [];
+  return new Promise((resolve, reject) => {
+    db()
+    .ref(`hist/${id}`)
+    .child(`debit/${year}`)
+    .orderByChild('month')
+    .equalTo(month)
+    .once('value')
+    .then(function(snapshot){
+      snapshot.forEach((keysSnapshot) => {
+        array.push(keysSnapshot.val());
+      })
+
+      resolve(array);
+    })
+    .catch(err => {
+      reject(err);
+    })
+  });
+}
+
+export function getCreditMonthUser(month, year, id){
+  let credit = 0;
+  return new Promise((resolve, reject) => {
+    db()
+    .ref(`hist/${id}`)
+    .child(`credit/${year}`)
+    .orderByChild('month')
+    .equalTo(month)
+    .once('value')
+    .then(function(snapshot){
+      snapshot.forEach((keysSnapshot) => {
+        let valueFormated = keysSnapshot.val().value.split('.').join('').split(',').join('.');
+        credit = parseFloat(credit) + parseFloat(valueFormated);
+      })
+
+      resolve(credit.toFixed(2));
+    })
+    .catch(err => {
+      reject(err);
+    })
   });
 }
 

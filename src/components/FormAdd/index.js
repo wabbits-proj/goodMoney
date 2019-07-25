@@ -29,64 +29,72 @@ export default function FormAdd({ typeForm }) {
   }
 
   async function addCredit(){
-    let user = await getItem('user');
-    insertChild(`hist/${user.id}/credit`, format(new Date(), 'YYYY'), {
-      value,
-      description,
-      date: format(new Date(), 'D/MM/YYYY'),
-      month: format(new Date(), 'MM'),
-    })
-    .then(res => {
-      alert('Sucesso');
-      setValue('');
-      setDescription('');
-      dispatch(getHistoric());
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    if(value.length > 0 && description.length > 0){
+      let user = await getItem('user');
+      insertChild(`hist/${user.id}/credit`, format(new Date(), 'YYYY'), {
+        value,
+        description,
+        date: format(new Date(), 'D/MM/YYYY'),
+        month: format(new Date(), 'MM'),
+      })
+      .then(res => {
+        alert('Sucesso');
+        setValue('');
+        setDescription('');
+        dispatch(getHistoric());
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    } else{
+      alert('Preencha o formulário para continuar!');
+    }    
   }
 
   async function addDebit(){
-    let valueFormated = value.split('.').join('').split(',').join('.');
-    let valuePortion = (portion > 1) ? valueMoney(parseFloat((valueFormated / portion)).toFixed(2).toString()) : value;
-    let dt = (icon) ? date :  format(addMonths(new Date(), 1), 'D/MM/YYYY');
-    let user = await getItem('user');
-    let promiseList = new Promise((resolve, reject) => {
-      for(let i=0; i<parseInt(portion); i++){
-        let arrayMonth = dt.split('/');
-        let dateTrated = addMonths(parse(`${arrayMonth[2]}-${arrayMonth[1]}-${arrayMonth[0]}`), i);
-        let dateFormate = format(dateTrated, 'D/MM/YYYY');
-        
-        insertChild(`hist/${user.id}/debit`, format(new Date(), 'YYYY'), {
-          value: valuePortion,
-          description,
-          date: dateFormate,
-          month: format(dateTrated, 'MM'),
-          portion: `${i+1}/${portion}`
-        })
-        .then(data => {
-          resolve(data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-      }
-    });
+    if(value.length > 0 && description.length > 0 && date.length > 0 && portion.length > 0 && (icon != null || iconNext != null)){
+      let valueFormated = value.split('.').join('').split(',').join('.');
+      let valuePortion = (portion > 1) ? valueMoney((valueFormated / portion).toFixed(2).toString()) : value;
+      let dt = (icon) ? date :  format(addMonths(new Date(), 1), 'D/MM/YYYY');
+      let user = await getItem('user');
+      let promiseList = new Promise((resolve, reject) => {
+        for(let i=0; i<parseInt(portion); i++){
+          let arrayMonth = dt.split('/');
+          let dateTrated = addMonths(parse(`${arrayMonth[2]}-${arrayMonth[1]}-${arrayMonth[0]}`), i);
+          let dateFormate = format(dateTrated, 'D/MM/YYYY');
+          
+          insertChild(`hist/${user.id}/debit`, format(new Date(), 'YYYY'), {
+            value: valuePortion,
+            description,
+            date: dateFormate,
+            month: format(dateTrated, 'MM'),
+            portion: `${i+1}/${portion}`
+          })
+          .then(data => {
+            resolve(data);
+          })
+          .catch(err => {
+            reject(err);
+          });
+        }
+      });
 
-    Promise.all([promiseList])
-    .then(data => {
-      alert('Sucesso');
-      setValue('');
-      setDescription('');
-      setDate('');
-      setPortion('');
-      dispatch(getHistoric());
-    })
-    .catch(error => {
-      console.log(error);
-      alert('Erro');
-    })
+      Promise.all([promiseList])
+      .then(data => {
+        alert('Sucesso');
+        setValue('');
+        setDescription('');
+        setDate('');
+        setPortion('');
+        dispatch(getHistoric());
+      })
+      .catch(error => {
+        console.log(error);
+        alert('Erro');
+      })
+    } else{
+      alert('Preencha o formulário para continuar!');
+    }
   }
 
   function renderFormType(){

@@ -31,8 +31,7 @@ export default function Login(props) {
     if(email != '' && password != ''){
       login(email, password)
         .then(data => {
-          alert(JSON.stringify(data));
-          loginSucess(data)
+          loginSucess(data);
         })
         .catch(error => {
           console.log(error);
@@ -43,7 +42,7 @@ export default function Login(props) {
   }
 
   async function loginSucess(data){
-    await setItem('user', { id: data.uid, email: data.email });
+    await setItem('user', data);
     props.navigation.navigate('Drawer');
   }
 
