@@ -17,6 +17,7 @@ export const TextInput = styled.TextInput.attrs({
   placeholderTextColor: '#828282'
 })`
   flex: 1;
+  height: ${heightPercentageToDp('5.8%')};
   padding-bottom: 6;
   padding-left: 10;
   font-size: 16;  
