@@ -35,15 +35,21 @@ export default function DrawerComponent(props) {
           <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="settings" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%'), fontFamily: 'AvenirLTStd-Medium' }}>Editar informações</Text>
         </Row>
-        <Row>
+        <Row
+          onPress={() => alert('Opa, certeza?')}
+        >
           <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="delete" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%'), fontFamily: 'AvenirLTStd-Medium' }}>Limpar dados</Text>
         </Row>
-        <Row>
+        <Row
+          onPress={() => props.navigation.navigate('Suggestion')}
+        >
           <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="description" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%'), fontFamily: 'AvenirLTStd-Medium' }}>Sugestões</Text>
         </Row>
-        <Row>
+        <Row
+          onPress={() => props.navigation.navigate('About')}
+        >
           <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="filter-none" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%'), fontFamily: 'AvenirLTStd-Medium' }}>Sobre</Text>
         </Row>

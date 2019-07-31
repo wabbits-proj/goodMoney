@@ -109,14 +109,18 @@ export default class Footer extends React.Component {
     height: new Animated.Value(heightPercentageToDp('7%')),
     opacity: new Animated.Value(1),
     visible: true,
-    form: null
+    form: null,
+    backHandler: null
   }
 
-  componentDidMount(){
-    backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+  componentDidMount(){    
+  }
+
+  validReturn(){
+    this.setState({backHandler: BackHandler.addEventListener('hardwareBackPress', () => {
       this.hideFormAdd();
       return true;
-    });
+    })});
   }
 
   onBtnPressDebit(){
@@ -129,6 +133,8 @@ export default class Footer extends React.Component {
       duration: 1000,
       }).start();
     });
+
+    this.validReturn();
 
     setTimeout(() => {  
       this.setState({
@@ -149,6 +155,8 @@ export default class Footer extends React.Component {
       }).start();
     });
 
+    this.validReturn();
+
     setTimeout(() => {
       this.setState({
         form: <FormAdd typeForm="addCredit" />,
@@ -162,6 +170,9 @@ export default class Footer extends React.Component {
       form: null,
       visible: true
     }); 
+
+    this.state.backHandler.remove();
+    this.setState({ backHandler: null });
 
     Animated.timing(this.state.height, {
       toValue: heightPercentageToDp('7%'),

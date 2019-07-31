@@ -9,6 +9,8 @@ import {
 import AuthLoading from '~/pages/AuthLoading';
 import Main from '~/pages/Main';
 import EditInfo from '~/pages/EditInfo';
+import About from '~/pages/About';
+import Suggestion from '~/pages/Suggestion';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import Forgot from '~/pages/Forgot';
@@ -18,10 +20,11 @@ import DrawerComponent from '~/components/DrawerComponent';
 import { widthPercentageToDp } from "~/services/utils";
 
 const Drawer = createDrawerNavigator({
-  Main, EditInfo
+  Main, EditInfo, About, Suggestion
 }, {
   contentComponent: (props) => <DrawerComponent navigation={props.navigation} />,
   drawerWidth: widthPercentageToDp('80%'),
+  initialRouteName: 'Suggestion'
 });
 
 const AuthStack = createSwitchNavigator({
