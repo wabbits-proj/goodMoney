@@ -42,7 +42,12 @@ export default function InfoProgress(props) {
 
   function remainObjective(v){
     let cont = parseFloat(todo.objective.split('.').join('').split(',').join('.')) - parseFloat(v.split('.').join('').split(',').join('.')); 
-    let val = valueMoney(cont.toFixed(2).toString());
+    let val = 0
+    if(cont >= 0){
+      val = valueMoney(cont.toFixed(2).toString());
+    } else{
+      val = valueMoney('0');
+    }
     setRemain(val);
     setPadding(arrayPadding[val.length]);  
   }
@@ -51,7 +56,12 @@ export default function InfoProgress(props) {
     let cont = parseFloat(value1.split('.').join('').split(',').join('.')) - parseFloat(value2.split('.').join('').split(',').join('.'));
     let val = valueMoney(cont.toFixed(2).toString());
     remainObjective(val);
-    setPercent(((100 / todo.objective.split('.').join('').split(',').join('.')) * cont.toFixed(2)));
+    let per = ((100 / todo.objective.split('.').join('').split(',').join('.')) * cont.toFixed(2));
+    if(per > 100){
+      setPercent(100);
+    } else{
+      setPercent(per);
+    }
     return val;  
   }
 

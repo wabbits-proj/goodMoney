@@ -8,6 +8,7 @@ import {
 
 import AuthLoading from '~/pages/AuthLoading';
 import Main from '~/pages/Main';
+import EditInfo from '~/pages/EditInfo';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import Forgot from '~/pages/Forgot';
@@ -17,7 +18,7 @@ import DrawerComponent from '~/components/DrawerComponent';
 import { widthPercentageToDp } from "~/services/utils";
 
 const Drawer = createDrawerNavigator({
-  Main
+  Main, EditInfo
 }, {
   contentComponent: (props) => <DrawerComponent navigation={props.navigation} />,
   drawerWidth: widthPercentageToDp('80%'),

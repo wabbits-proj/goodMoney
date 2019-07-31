@@ -29,7 +29,9 @@ export default function DrawerComponent(props) {
       <SafeAreaView style={{ flex: 1, marginTop: heightPercentageToDp('1.2%')  }}>
         {/* <DrawerItems {...props} /> */}
 
-        <Row>
+        <Row
+          onPress={() => props.navigation.navigate('EditInfo')}
+        >
           <Icon style={{ fontSize: getAdjustedFontSize(20) }} name="settings" size={12} />
           <Text style={{ fontSize: getAdjustedFontSize(16), paddingLeft: widthPercentageToDp('3%'), fontFamily: 'AvenirLTStd-Medium' }}>Editar informações</Text>
         </Row>
